@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+
+    <appender name="FILE-AUDIT" class="ch.qos.logback.core.FileAppender">
+        <file>{user.home}/.spting_shop/debug.log</file>
+        <append>true</append>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="FILE-AUDIT"/>-->
+    </logger>
+
+    <logger name="com.todoist.sql.server.utils.aop.LoggingConfog" level="debug" additivity="false">
+        <!--<appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="FILE-AUDIT"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-AUDIT"/>
+    </root>
+
+</configuration>
